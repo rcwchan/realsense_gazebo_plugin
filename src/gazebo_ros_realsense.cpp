@@ -257,11 +257,23 @@ sensor_msgs::CameraInfo cameraInfo(const sensor_msgs::Image &image,
 
   float focal = 0.5 * image.width / tan(0.5 * horizontal_fov);
 
+  info_msg.D.resize(5);
+
+  info_msg.D[0] = 0.0;
+  info_msg.D[1] = 0.0;
+  info_msg.D[2] = 0.0;
+  info_msg.D[3] = 0.0;
+  info_msg.D[4] = 0.0;
+
   info_msg.K[0] = focal;
   info_msg.K[4] = focal;
   info_msg.K[2] = info_msg.width * 0.5;
   info_msg.K[5] = info_msg.height * 0.5;
   info_msg.K[8] = 1.;
+
+  info_msg.R[0] = 1.;
+  info_msg.R[4] = 1.;
+  info_msg.R[8] = 1.;
 
   info_msg.P[0] = info_msg.K[0];
   info_msg.P[5] = info_msg.K[4];
